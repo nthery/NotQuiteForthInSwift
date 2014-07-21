@@ -53,7 +53,6 @@
 		730AB45A19780535002B055B /* SwiftForthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SwiftForthTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		73211489197D8CB2007799A4 /* error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = error.swift; sourceTree = "<group>"; };
 		734A4735197AE1E300FD038A /* compiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = compiler.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		735461CC197DB45C00666B56 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		7376F06C197D25E9006DC1EB /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		7376F06F197D263C006DC1EB /* utils_test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils_test.swift; sourceTree = "<group>"; };
 		7376F071197D2B55006DC1EB /* vm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vm.swift; sourceTree = "<group>"; };
@@ -105,7 +104,6 @@
 				7376F071197D2B55006DC1EB /* vm.swift */,
 				73F79375197D57E0000BA52F /* evaluator.swift */,
 				73211489197D8CB2007799A4 /* error.swift */,
-				735461CC197DB45C00666B56 /* README */,
 			);
 			path = SwiftForth;
 			sourceTree = "<group>";
