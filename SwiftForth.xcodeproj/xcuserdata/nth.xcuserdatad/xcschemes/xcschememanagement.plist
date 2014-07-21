@@ -9,10 +9,20 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>SwiftForthTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>730AB44719780478002B055B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>730AB45519780535002B055B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
