@@ -191,6 +191,8 @@ class Compiler : ErrorRaiser {
         }
     }
 
+    // Transform source string into compiled phrase.  Return phrase on success
+    // or nil on error.
     func compile(input: String) -> CompiledPhrase? {
         let tokens = splitInBlankSeparatedWords(input)
         
@@ -214,6 +216,7 @@ class Compiler : ErrorRaiser {
         return isCompiling ? CompiledPhrase() : phraseBeingCompiled.getAndReset()
     }
  
+    // Compile single token into phraseBeingCompiled.  Return true on success.
     func compileToken(token: String) -> Bool {
         if let n = token.toForthInt() {
             phraseBeingCompiled.appendInstruction(.PushConstant(n))
@@ -235,6 +238,9 @@ class Compiler : ErrorRaiser {
         return true
     }
     
+    // Deal with words evaluated at compile-time.  Return true on
+    // success.
+    //  TODO: See Definition.Body.SpecialForm comment.
     func compileSpecialForm(handler: String) -> Bool {
         switch (handler) {
         case ":":
