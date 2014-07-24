@@ -71,6 +71,10 @@ extension String {
     }
 }
 
-func debug(msg: String) {
-    // println("[DBG] \(msg)")
+var debuglevel = 0
+
+func debug(msg: @auto_closure () -> String) {
+    if debuglevel > 0 {
+        println("[DBG] \(msg())")
+    }
 }
