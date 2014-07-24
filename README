@@ -3,7 +3,7 @@ myself some Swift.
 
 DISCLAIMER: I have never programmed in Forth.
 
-XCode 6 Beta 3 used.
+XCode 6 Beta 4 used.
 
 FEATURES
 ========
@@ -39,5 +39,7 @@ TODO: add support for loops
 TODO: add support for more primitive Forth words
 TODO: test recursivity (fibonnacci)
 TODO: turn library into Framework imported by repl to learn how Swift handles public/private
+TODO: fix crash when '.' on empty stack
+
 
 
