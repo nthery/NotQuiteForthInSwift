@@ -50,6 +50,10 @@ class EvaluatorTest : XCTestCase {
         checkEvalSuccess(": foo 42 ; foo .", expectedOutput: "42 ")
     }
     
+    func testDotOnEmptyStack() {
+        checkEvalFailure(".")
+    }
+
     func testOnePlusTwo() {
         checkEvalSuccess("1 2 + .", expectedOutput: "3 ")
     }
@@ -138,6 +142,10 @@ class EvaluatorTest : XCTestCase {
         checkEvalSuccess("65 EMIT", expectedOutput: "A")
     }
     
+    func testEmitEmptyStack() {
+        checkEvalFailure("EMIT")
+    }
+
     func testCR() {
         checkEvalSuccess("CR", expectedOutput: "\r")
     }

@@ -64,6 +64,7 @@ func compiledPhraseAsAString(phrase: CompiledPhrase) -> String {
 }
 
 // Forth virtual machine
+// TODO: Use Stack.tryTop() and .tryPop() returning optionals for dealing with errors?
 class VM : ErrorRaiser {
     var argStack = Stack<Int>()
     var output = ""
@@ -88,24 +89,24 @@ class VM : ErrorRaiser {
     // Execute single instruction and return new PC on success or nil if a runtime
     // error occurred.
     func execInstruction(pc: Int, insn: Instruction) -> Int? {
+        var ok = true
         switch insn {
         case .Add:
-            if argStack.count >= 2 {
-                let rhs = argStack.pop()
-                let lhs = argStack.pop()
-                argStack.push(lhs + rhs)
-            } else {
-                error("add: not enough arguments")
-                return nil
+            ok = execOrFail(minStackDepth: 2, operation: "add") {
+                let rhs = self.argStack.pop()
+                let lhs = self.argStack.pop()
+                self.argStack.push(lhs + rhs)
             }
         case .Call(let phrase):
             if !execPhrase(phrase) {
-                return nil
+                ok = false
             }
         case .PushConstant(let k):
             argStack.push(k)
         case .Dot:
-            output += "\(argStack.pop()) "
+            ok = execOrFail(minStackDepth: 1, operation: "dot") {
+                self.output += "\(self.argStack.pop()) "
+            }
         case .Nop:
             break
         case let .Branch(condition, target):
@@ -113,10 +114,12 @@ class VM : ErrorRaiser {
                 return target!
             }
         case .Emit:
-            output += String(fromAsciiCode: argStack.pop())
+            ok = execOrFail(minStackDepth: 1, operation: "EMIT") {
+                self.output += String(fromAsciiCode: self.argStack.pop())
+            }
         }
         
-        return pc + 1
+        return ok ? pc + 1 : nil
     }
     
     func conditionIsTrue(condition: BranchCondition) -> Bool {
@@ -125,6 +128,20 @@ class VM : ErrorRaiser {
             return true
         case .IfZero:
             return argStack.pop() == 0
+        }
+    }
+
+    // Execute specified closure if the argument stack is deep enough.  Report an error
+    // and return false otherwise.
+    // Executing a closure in the interpreter inner loop is probably not good performance
+    // wise but this is an opportunity to play with trailing closures.
+    func execOrFail(minStackDepth depth: Int, operation: String, code: () -> ()) -> Bool {
+        if argStack.count >= depth {
+            code()
+            return true
+        } else {
+            error("\(operation): not enough arguments")
+            return false
         }
     }
 }
