@@ -48,8 +48,8 @@ class Dictionary {
         content.append(def)
     }
     
-    func appendPhrase(name: String, phrase: CompiledPhrase) {
-        content.append(Definition(name: name, body: .Regular(phrase: phrase)))
+    func appendPhrase(name: String, phrase: [Instruction]) {
+        content.append(Definition(name: name, body: .Regular(phrase: CompiledPhrase(instructions: phrase))))
     }
     
     func appendSpecialForm(name: String, handler: String) {
@@ -77,7 +77,7 @@ class Dictionary {
 
 // Helper class for incrementally compiling a phrase.
 class PhraseBuilder {
-    var phrase = CompiledPhrase()
+    var phrase = [Instruction]()
     var forwardBranchCount = 0
     
     var nextAddress : Address {
@@ -110,8 +110,8 @@ class PhraseBuilder {
     func getAndReset() -> CompiledPhrase {
         assert(forwardBranchCount == 0, "phrase has unpatched instructions")
         let result = phrase
-        phrase = CompiledPhrase()
-        return result
+        phrase = [Instruction]()
+        return CompiledPhrase(instructions: result)
     }
 }
 

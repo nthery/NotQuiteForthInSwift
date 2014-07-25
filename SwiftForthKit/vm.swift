@@ -75,17 +75,25 @@ enum Instruction : Printable {
     }
 }
 
-// TODO: turn into class or struct
-typealias CompiledPhrase = [Instruction]
+// Well-formed sequence of instructions.  Typically corresponds to a word definition.
+struct CompiledPhrase : Printable {
+    let instructions  = [Instruction]()
 
-// TODO: Use Printable protocol when turning CompiledPhrase into struct.
-func compiledPhraseAsAString(phrase: CompiledPhrase) -> String {
-    var acc = ""
-    for (i, insn) in enumerate(phrase) {
-        acc += "\(i): \(insn); "
+    subscript(i: Int) -> Instruction {
+        return instructions[i]
     }
-    acc += "\n"
-    return acc
+
+    var count : Int {
+        return instructions.count
+    }
+
+    var description : String {
+        var acc = ""
+        for (i, insn) in enumerate(instructions) {
+            acc += "\(i):\(insn) "
+        }
+        return acc
+    }
 }
 
 // Forth virtual machine

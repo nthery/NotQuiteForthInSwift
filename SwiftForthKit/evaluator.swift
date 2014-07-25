@@ -22,7 +22,7 @@ public class ForthEvaluator {
     // Report an error through handler passed to setErrorHandler() and return false on failure.
     public func eval(input: String) -> Bool {
         if let phrase = compiler.compile(input) {
-            debug("compiled: \(compiledPhraseAsAString(phrase))")
+            debug("compiled: \(phrase)")
             return vm.execPhrase(phrase)
         } else {
             return false
