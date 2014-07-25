@@ -28,22 +28,21 @@ public class ForthEvaluator {
         return vm.argStack
     }
     
-    // Main entry point for clients.
-    public func eval(input: String) -> Result {
+    // Evaluate Forth source statements.
+    // Return true on success.
+    // Report an error through ForthErrorHandler and return false on failure.
+    public func eval(input: String) -> Bool {
         if let phrase = compiler.compile(input) {
-            return vm.execPhrase(phrase) ? .OK : .KO
+            return vm.execPhrase(phrase)
         } else {
-            return .KO
+            return false
         }
     }
 
     func evalOrDie(input: String) {
-        let result = eval(input)
-        if result != .OK {
+        if !eval(input) {
             println("failed to evaluate '\(input)'")
             exit(1)
         }
     }
-    
-
 }

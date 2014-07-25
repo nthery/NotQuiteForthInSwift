@@ -4,19 +4,6 @@
 
 import Foundation
 
-public enum Result {
-    case OK, KO
-
-    var description : String {
-        switch self {
-        case .OK:
-            return "OK"
-        case .KO:
-            return "KO"
-        }
-    }
-}
-
 // Clients must implement this protocol to be notified on error.
 public protocol ForthErrorHandler {
     func HandleError(msg: String)

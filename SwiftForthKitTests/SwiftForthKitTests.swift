@@ -32,9 +32,7 @@ class EvaluatorTest : XCTestCase {
     }
     
     func checkEvalSuccess(input: String, expectedOutput: String) {
-        let result = evaluator.eval(input)
-        XCTAssertEqual(Result.OK, result)
-        
+        XCTAssert(evaluator.eval(input))
         let actualOutput = evaluator.readAndResetOutput()
         XCTAssertEqual(expectedOutput, actualOutput)
     }
@@ -42,8 +40,7 @@ class EvaluatorTest : XCTestCase {
     func checkEvalFailure(input: String) {
         let counter = ErrorCounter()
         evaluator.setErrorHandler(counter)
-        let result = evaluator.eval(input)
-        XCTAssertEqual(Result.KO, result)
+        XCTAssert(!evaluator.eval(input))
         XCTAssert(counter.errors > 0)
         
         // Check compiler reset to correct state.
