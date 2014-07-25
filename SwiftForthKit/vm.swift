@@ -7,10 +7,10 @@ import Foundation
 // Index in CompiledPhrase
 typealias Address = Int
 
-enum BranchCondition {
+enum BranchCondition : Printable {
     case Always, IfZero
     
-    var asString : String {
+    var description : String {
         switch self {
         case Always:
             return "always"
@@ -21,7 +21,7 @@ enum BranchCondition {
 }
 
 // The instructions the virtual machine supports.
-enum Instruction {
+enum Instruction : Printable {
     case Nop
     case Add
     case Sub
@@ -33,7 +33,7 @@ enum Instruction {
     case Emit
     case Branch(BranchCondition, Address?)
     
-    var asString : String {
+    var description : String {
         switch self {
         case Nop:
             return "nop"
@@ -55,10 +55,10 @@ enum Instruction {
         case Emit:
             return "emit"
         case let Branch(condition, address):
-            return "branch(\(condition.asString), address)"
+            return "branch(\(condition), address)"
         }
     }
-    
+
     var expectedArgumentCount : Int {
     switch self {
     case Nop, .PushConstant, Call:
@@ -78,12 +78,13 @@ enum Instruction {
 // TODO: turn into class or struct
 typealias CompiledPhrase = [Instruction]
 
+// TODO: Use Printable protocol when turning CompiledPhrase into struct.
 func compiledPhraseAsAString(phrase: CompiledPhrase) -> String {
     var acc = ""
-    for insn in phrase {
-        acc += insn.asString
-        acc += "\n"
+    for (i, insn) in enumerate(phrase) {
+        acc += "\(i): \(insn); "
     }
+    acc += "\n"
     return acc
 }
 
@@ -113,7 +114,7 @@ class VM : ErrorRaiser {
     // error occurred.
     func execInstruction(pc: Int, insn: Instruction) -> Int? {
         if argStack.count < insn.expectedArgumentCount {
-            error("\(insn.asString): expected \(insn.expectedArgumentCount) argument(s) but got \(argStack.count)")
+            error("\(insn): expected \(insn.expectedArgumentCount) argument(s) but got \(argStack.count)")
             return nil
         }
         
