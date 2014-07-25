@@ -75,7 +75,7 @@
 		7354157A198160ED00B59DF8 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		7376F06C197D25E9006DC1EB /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		7376F06F197D263C006DC1EB /* utils_test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils_test.swift; sourceTree = "<group>"; };
-		7376F071197D2B55006DC1EB /* vm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vm.swift; sourceTree = "<group>"; };
+		7376F071197D2B55006DC1EB /* vm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = vm.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		73F79375197D57E0000BA52F /* evaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = evaluator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -532,6 +532,7 @@
 				73005359198282DA0041266D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7300535D198282DA0041266D /* Build configuration list for PBXNativeTarget "SwiftForthKitTests" */ = {
 			isa = XCConfigurationList;
@@ -540,6 +541,7 @@
 				7300535B198282DA0041266D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		730AB44319780478002B055B /* Build configuration list for PBXProject "SwiftForth" */ = {
 			isa = XCConfigurationList;

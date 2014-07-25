@@ -80,22 +80,22 @@ class PhraseBuilder {
     var phrase = [Instruction]()
     var forwardBranchCount = 0
     
-    var nextAddress : Address {
+    var nextAddress : CompiledPhrase.Address {
         return phrase.count
     }
     
-    func appendInstruction(insn: Instruction) -> Address {
+    func appendInstruction(insn: Instruction) -> CompiledPhrase.Address {
         phrase += insn
         return phrase.count - 1
     }
     
-    func appendForwardBranch(condition: BranchCondition) -> Address {
+    func appendForwardBranch(condition: BranchCondition) -> CompiledPhrase.Address {
         ++forwardBranchCount
         phrase += .Branch(condition, nil)
         return phrase.count - 1
     }
     
-    func patchBranchAt(address: Address, withTarget target: Address) {
+    func patchBranchAt(address: CompiledPhrase.Address, withTarget target: CompiledPhrase.Address) {
         assert(forwardBranchCount > 0, "unexpected patching")
         --forwardBranchCount
         
@@ -163,7 +163,7 @@ class Compiler : ErrorRaiser {
     }
 
     var definitionState = DefinitionState.None
-    var ifStack = ForthStack<Address>()
+    var ifStack = ForthStack<CompiledPhrase.Address>()
     var dictionary = Dictionary()
     var phraseBeingCompiled = PhraseBuilder()
 
@@ -184,7 +184,7 @@ class Compiler : ErrorRaiser {
     
     override func resetAfterError() {
         definitionState = DefinitionState.None
-        ifStack = ForthStack<Address>()
+        ifStack = ForthStack<CompiledPhrase.Address>()
         phraseBeingCompiled = PhraseBuilder()
     }
     

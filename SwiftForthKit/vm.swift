@@ -4,9 +4,7 @@
 
 import Foundation
 
-// Index in CompiledPhrase
-typealias Address = Int
-
+// TODO: Nest in Instruction.
 enum BranchCondition : Printable {
     case Always, IfZero
     
@@ -31,7 +29,7 @@ enum Instruction : Printable {
     case PushConstant(Int)
     case Call(name: String, CompiledPhrase)
     case Emit
-    case Branch(BranchCondition, Address?)
+    case Branch(BranchCondition, CompiledPhrase.Address?)
     
     var description : String {
         switch self {
@@ -77,6 +75,9 @@ enum Instruction : Printable {
 
 // Well-formed sequence of instructions.  Typically corresponds to a word definition.
 struct CompiledPhrase : Printable {
+    // Instruction offset.
+    typealias Address = Int
+
     let instructions  = [Instruction]()
 
     subscript(i: Int) -> Instruction {
