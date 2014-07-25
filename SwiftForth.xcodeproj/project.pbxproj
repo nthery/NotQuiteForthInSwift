@@ -19,17 +19,10 @@
 		73005364198283DB0041266D /* compiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A4735197AE1E300FD038A /* compiler.swift */; };
 		73005365198283DB0041266D /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F06C197D25E9006DC1EB /* utils.swift */; };
 		73005366198283DB0041266D /* vm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F071197D2B55006DC1EB /* vm.swift */; };
-		73005367198283DB0041266D /* evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F79375197D57E0000BA52F /* evaluator.swift */; };
 		73005368198283DB0041266D /* error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73211489197D8CB2007799A4 /* error.swift */; };
+		7300536E198287FF0041266D /* utils_test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F06F197D263C006DC1EB /* utils_test.swift */; };
+		7300536F19828B050041266D /* evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F79375197D57E0000BA52F /* evaluator.swift */; };
 		730AB44C19780478002B055B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730AB44B19780478002B055B /* main.swift */; };
-		730AB45B19780535002B055B /* SwiftForthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730AB45A19780535002B055B /* SwiftForthTests.swift */; };
-		7321148B197D8CB2007799A4 /* error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73211489197D8CB2007799A4 /* error.swift */; };
-		734A4734197AE14100FD038A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730AB44B19780478002B055B /* main.swift */; };
-		734A4737197AE1E300FD038A /* compiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A4735197AE1E300FD038A /* compiler.swift */; };
-		7376F06E197D25E9006DC1EB /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F06C197D25E9006DC1EB /* utils.swift */; };
-		7376F070197D263C006DC1EB /* utils_test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F06F197D263C006DC1EB /* utils_test.swift */; };
-		7376F073197D2B55006DC1EB /* vm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F071197D2B55006DC1EB /* vm.swift */; };
-		73F79377197D57FC000BA52F /* evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F79375197D57E0000BA52F /* evaluator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,12 +40,12 @@
 			remoteGlobalIDString = 73005344198282DA0041266D;
 			remoteInfo = SwiftForthKit;
 		};
-		734A4732197AE0F800FD038A /* PBXContainerItemProxy */ = {
+		7300536B1982842C0041266D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 730AB44019780478002B055B /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 730AB44719780478002B055B;
-			remoteInfo = SwiftForth;
+			remoteGlobalIDString = 73005344198282DA0041266D;
+			remoteInfo = SwiftForthKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -77,16 +70,13 @@
 		73005356198282DA0041266D /* SwiftForthKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftForthKitTests.swift; sourceTree = "<group>"; };
 		730AB44819780478002B055B /* SwiftForth */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftForth; sourceTree = BUILT_PRODUCTS_DIR; };
 		730AB44B19780478002B055B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		730AB45619780535002B055B /* SwiftForthTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftForthTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		730AB45919780535002B055B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		730AB45A19780535002B055B /* SwiftForthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SwiftForthTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		73211489197D8CB2007799A4 /* error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = error.swift; path = ../SwiftForth/error.swift; sourceTree = "<group>"; };
-		734A4735197AE1E300FD038A /* compiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = compiler.swift; path = ../SwiftForth/compiler.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		73211489197D8CB2007799A4 /* error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = error.swift; sourceTree = "<group>"; };
+		734A4735197AE1E300FD038A /* compiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = compiler.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		7354157A198160ED00B59DF8 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
-		7376F06C197D25E9006DC1EB /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = utils.swift; path = ../SwiftForth/utils.swift; sourceTree = "<group>"; };
+		7376F06C197D25E9006DC1EB /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		7376F06F197D263C006DC1EB /* utils_test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils_test.swift; sourceTree = "<group>"; };
-		7376F071197D2B55006DC1EB /* vm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = vm.swift; path = ../SwiftForth/vm.swift; sourceTree = "<group>"; };
-		73F79375197D57E0000BA52F /* evaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = evaluator.swift; path = ../SwiftForth/evaluator.swift; sourceTree = "<group>"; };
+		7376F071197D2B55006DC1EB /* vm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vm.swift; sourceTree = "<group>"; };
+		73F79375197D57E0000BA52F /* evaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = evaluator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,13 +100,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7300535E198282FC0041266D /* SwiftForthKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		730AB45319780535002B055B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +131,7 @@
 		73005353198282DA0041266D /* SwiftForthKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				7376F06F197D263C006DC1EB /* utils_test.swift */,
 				73005356198282DA0041266D /* SwiftForthKitTests.swift */,
 				73005354198282DA0041266D /* Supporting Files */,
 			);
@@ -167,7 +151,6 @@
 			children = (
 				7354157A198160ED00B59DF8 /* README */,
 				730AB44A19780478002B055B /* SwiftForth */,
-				730AB45719780535002B055B /* SwiftForthTests */,
 				73005346198282DA0041266D /* SwiftForthKit */,
 				73005353198282DA0041266D /* SwiftForthKitTests */,
 				730AB44919780478002B055B /* Products */,
@@ -178,7 +161,6 @@
 			isa = PBXGroup;
 			children = (
 				730AB44819780478002B055B /* SwiftForth */,
-				730AB45619780535002B055B /* SwiftForthTests.xctest */,
 				73005345198282DA0041266D /* SwiftForthKit.framework */,
 				7300534F198282DA0041266D /* SwiftForthKitTests.xctest */,
 			);
@@ -191,24 +173,6 @@
 				730AB44B19780478002B055B /* main.swift */,
 			);
 			path = SwiftForth;
-			sourceTree = "<group>";
-		};
-		730AB45719780535002B055B /* SwiftForthTests */ = {
-			isa = PBXGroup;
-			children = (
-				7376F06F197D263C006DC1EB /* utils_test.swift */,
-				730AB45A19780535002B055B /* SwiftForthTests.swift */,
-				730AB45819780535002B055B /* Supporting Files */,
-			);
-			path = SwiftForthTests;
-			sourceTree = "<group>";
-		};
-		730AB45819780535002B055B /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				730AB45919780535002B055B /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,6 +220,7 @@
 			dependencies = (
 				73005352198282DA0041266D /* PBXTargetDependency */,
 				7300536A1982842C0041266D /* PBXTargetDependency */,
+				7300536C1982842C0041266D /* PBXTargetDependency */,
 			);
 			name = SwiftForthKitTests;
 			productName = SwiftForthKitTests;
@@ -279,24 +244,6 @@
 			productReference = 730AB44819780478002B055B /* SwiftForth */;
 			productType = "com.apple.product-type.tool";
 		};
-		730AB45519780535002B055B /* SwiftForthTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 730AB45C19780535002B055B /* Build configuration list for PBXNativeTarget "SwiftForthTests" */;
-			buildPhases = (
-				730AB45219780535002B055B /* Sources */,
-				730AB45319780535002B055B /* Frameworks */,
-				730AB45419780535002B055B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				734A4733197AE0F800FD038A /* PBXTargetDependency */,
-			);
-			name = SwiftForthTests;
-			productName = SwiftForthTests;
-			productReference = 730AB45619780535002B055B /* SwiftForthTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -316,9 +263,6 @@
 					730AB44719780478002B055B = {
 						CreatedOnToolsVersion = 6.0;
 					};
-					730AB45519780535002B055B = {
-						CreatedOnToolsVersion = 6.0;
-					};
 				};
 			};
 			buildConfigurationList = 730AB44319780478002B055B /* Build configuration list for PBXProject "SwiftForth" */;
@@ -334,7 +278,6 @@
 			projectRoot = "";
 			targets = (
 				730AB44719780478002B055B /* SwiftForth */,
-				730AB45519780535002B055B /* SwiftForthTests */,
 				73005344198282DA0041266D /* SwiftForthKit */,
 				7300534E198282DA0041266D /* SwiftForthKitTests */,
 			);
@@ -350,13 +293,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		7300534D198282DA0041266D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		730AB45419780535002B055B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -382,10 +318,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7300536F19828B050041266D /* evaluator.swift in Sources */,
 				73005365198283DB0041266D /* utils.swift in Sources */,
+				7300536E198287FF0041266D /* utils_test.swift in Sources */,
 				73005364198283DB0041266D /* compiler.swift in Sources */,
 				73005366198283DB0041266D /* vm.swift in Sources */,
-				73005367198283DB0041266D /* evaluator.swift in Sources */,
 				73005368198283DB0041266D /* error.swift in Sources */,
 				73005357198282DA0041266D /* SwiftForthKitTests.swift in Sources */,
 			);
@@ -396,21 +333,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				730AB44C19780478002B055B /* main.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		730AB45219780535002B055B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7321148B197D8CB2007799A4 /* error.swift in Sources */,
-				73F79377197D57FC000BA52F /* evaluator.swift in Sources */,
-				7376F070197D263C006DC1EB /* utils_test.swift in Sources */,
-				734A4737197AE1E300FD038A /* compiler.swift in Sources */,
-				7376F073197D2B55006DC1EB /* vm.swift in Sources */,
-				734A4734197AE14100FD038A /* main.swift in Sources */,
-				730AB45B19780535002B055B /* SwiftForthTests.swift in Sources */,
-				7376F06E197D25E9006DC1EB /* utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,10 +349,10 @@
 			target = 73005344198282DA0041266D /* SwiftForthKit */;
 			targetProxy = 730053691982842C0041266D /* PBXContainerItemProxy */;
 		};
-		734A4733197AE0F800FD038A /* PBXTargetDependency */ = {
+		7300536C1982842C0041266D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 730AB44719780478002B055B /* SwiftForth */;
-			targetProxy = 734A4732197AE0F800FD038A /* PBXContainerItemProxy */;
+			target = 73005344198282DA0041266D /* SwiftForthKit */;
+			targetProxy = 7300536B1982842C0041266D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -600,38 +522,6 @@
 			};
 			name = Release;
 		};
-		730AB45D19780535002B055B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SwiftForthTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		730AB45E19780535002B055B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SwiftForthTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -665,15 +555,6 @@
 			buildConfigurations = (
 				730AB45019780478002B055B /* Debug */,
 				730AB45119780478002B055B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		730AB45C19780535002B055B /* Build configuration list for PBXNativeTarget "SwiftForthTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				730AB45D19780535002B055B /* Debug */,
-				730AB45E19780535002B055B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
