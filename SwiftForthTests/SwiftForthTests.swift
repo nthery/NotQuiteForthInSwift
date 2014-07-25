@@ -154,6 +154,25 @@ class AddTest : EvaluatorTest {
     }
 }
 
+class MulTest : EvaluatorTest {
+    func testBinary() {
+        checkEvalSuccess("2 3 * .", expectedOutput: "6 ")
+    }
+    
+    func testTernary() {
+        checkEvalSuccess("2 3 * 4 * .", expectedOutput: "24 ")
+        checkEvalSuccess("2 3 4 * * .", expectedOutput: "24 ")
+    }
+    
+    func testWithoutOperand() {
+        checkEvalFailure("*")
+    }
+    
+    func testWithSingleOperand() {
+        checkEvalFailure("1 *")
+    }
+}
+
 class DictionaryTest : XCTestCase {
     var dict = Dictionary()
     

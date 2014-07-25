@@ -24,6 +24,7 @@ enum BranchCondition {
 enum Instruction {
     case Nop
     case Add
+    case Mul
     case Dot
     case PushConstant(Int)
     case Call(CompiledPhrase)
@@ -36,6 +37,8 @@ enum Instruction {
             return "nop"
         case Add:
             return "add"
+        case Mul:
+            return "mul"
         case Dot:
             return "dot"
         case let PushConstant(k):
@@ -96,6 +99,12 @@ class VM : ErrorRaiser {
                 let rhs = self.argStack.pop()
                 let lhs = self.argStack.pop()
                 self.argStack.push(lhs + rhs)
+            }
+        case .Mul:
+            ok = execOrFail(minStackDepth: 2, operation: "mul") {
+                let rhs = self.argStack.pop()
+                let lhs = self.argStack.pop()
+                self.argStack.push(lhs * rhs)
             }
         case .Call(let phrase):
             if !execPhrase(phrase) {
