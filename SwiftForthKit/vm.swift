@@ -29,7 +29,7 @@ enum Instruction : Printable {
     case Div
     case Dot
     case PushConstant(Int)
-    case Call(CompiledPhrase)
+    case Call(name: String, CompiledPhrase)
     case Emit
     case Branch(BranchCondition, Address?)
     
@@ -50,8 +50,8 @@ enum Instruction : Printable {
         case let PushConstant(k):
             return "pushConstant(\(k))"
         // TODO: add name in CompiledPhrease for disassembly
-        case let Call(_):
-            return "call"
+        case let Call(name, _):
+            return "call(\(name))"
         case Emit:
             return "emit"
         case let Branch(condition, address):
@@ -148,7 +148,7 @@ class VM : ErrorRaiser {
                 error("division by zero")
                 return nil
             }
-        case .Call(let phrase):
+        case .Call(_, let phrase):
             if !execPhrase(phrase) {
                 return nil
             }

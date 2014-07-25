@@ -231,7 +231,7 @@ class Compiler : ErrorRaiser {
                     return false
                 }
             case .Regular(let phrase):
-                phraseBeingCompiled.appendInstruction(.Call(phrase))
+                phraseBeingCompiled.appendInstruction(.Call(name: token, phrase))
             }
         } else {
             error("unknown word \(token)")
