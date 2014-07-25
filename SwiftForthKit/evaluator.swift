@@ -4,32 +4,32 @@
 
 import Foundation
 
-class Evaluator {
+public class Evaluator {
     let compiler = Compiler()
     let vm = VM()
     
-    init() {
+    public init() {
         // Compile builtins implemented in Forth.
         evalOrDie(": CR 13 EMIT ;")
     }
     
-    func setErrorHandler(handler: ErrorHandler) {
+    public func setErrorHandler(handler: ErrorHandler) {
         compiler.errorHandler = handler
         vm.errorHandler = handler
     }
     
-    func readAndResetOutput() -> String {
+    public func readAndResetOutput() -> String {
         let o = vm.output
         vm.output = ""
         return o
     }
     
-    var argStack : Stack<Int> {
+    public var argStack : Stack<Int> {
         return vm.argStack
     }
     
     // Main entry point for clients.
-    func eval(input: String) -> Result {
+    public func eval(input: String) -> Result {
         if let phrase = compiler.compile(input) {
             return vm.execPhrase(phrase) ? .OK : .KO
         } else {

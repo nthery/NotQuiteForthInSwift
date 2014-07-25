@@ -4,7 +4,7 @@
 
 import Foundation
 
-enum Result {
+public enum Result {
     case OK, KO
 
     var description : String {
@@ -18,7 +18,7 @@ enum Result {
 }
 
 // Clients must implement this protocol to be notified on error.
-protocol ErrorHandler {
+public protocol ErrorHandler {
     func HandleError(msg: String)
 }
 

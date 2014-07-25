@@ -24,44 +24,35 @@ func splitInBlankSeparatedWords(input: String) -> [String] {
     return output
 }
 
-class Stack<T> {
+public class Stack<T> {
     var items = [T]()
     
-    var isEmpty : Bool {
+    public var isEmpty : Bool {
         return items.isEmpty
     }
     
-    var count : Int {
+    public var count : Int {
         return items.count
     }
     
-    func push(value: T) {
+    public func push(value: T) {
         items.append(value)
     }
     
-    func pop() -> T {
+    public func pop() -> T {
         return items.removeLast()
     }
     
-    func top() -> T {
+    public func top() -> T {
         return items[items.count-1]
     }
     
-    var asString : String {
+    public var asString : String {
         var acc = ""
         for i in items {
             acc += "\(i) "
         }
         return acc
-    }
-}
-
-class StdinLineReader {
-    var stdin = NSFileHandle.fileHandleWithStandardInput()
-    
-    func read() -> String {
-        // TODO: broken: read whole file when input is not console
-        return NSString(data: stdin.availableData, encoding: NSUTF8StringEncoding)
     }
 }
 

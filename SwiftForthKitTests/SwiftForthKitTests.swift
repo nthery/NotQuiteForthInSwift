@@ -11,7 +11,7 @@ import XCTest
 
 class ErrorCounter : ErrorHandler {
     var errors = 0
-
+    
     func HandleError(msg: String) {
         ++errors
     }
@@ -30,11 +30,11 @@ class EvaluatorTest : XCTestCase {
     override func setUp() {
         evaluator.setErrorHandler(FailOnError())
     }
-
+    
     func checkEvalSuccess(input: String, expectedOutput: String) {
         let result = evaluator.eval(input)
         XCTAssertEqual(Result.OK, result)
-
+        
         let actualOutput = evaluator.readAndResetOutput()
         XCTAssertEqual(expectedOutput, actualOutput)
     }
@@ -45,7 +45,7 @@ class EvaluatorTest : XCTestCase {
         let result = evaluator.eval(input)
         XCTAssertEqual(Result.KO, result)
         XCTAssert(counter.errors > 0)
-
+        
         // Check compiler reset to correct state.
         checkEvalSuccess(": foo 42 ; foo .", expectedOutput: "42 ")
     }
@@ -53,7 +53,7 @@ class EvaluatorTest : XCTestCase {
     func testDotOnEmptyStack() {
         checkEvalFailure(".")
     }
-
+    
     func testConstant() {
         checkEvalSuccess(": k 42 ;", expectedOutput: "")
         checkEvalSuccess("k 1 + .", expectedOutput: "43 ")
@@ -73,7 +73,7 @@ class EvaluatorTest : XCTestCase {
         checkEvalSuccess(": nonleaf 1 leaf + ;", expectedOutput: "")
         checkEvalSuccess("nonleaf 1 + .", expectedOutput: "5 ")
     }
-
+    
     func testNumberAfterColon() {
         checkEvalFailure(": 1 2 ;")
     }
@@ -93,11 +93,11 @@ class EvaluatorTest : XCTestCase {
     func testIfTaken() {
         checkEvalSuccess("10 1 IF 20 THEN .", expectedOutput: "20 ")
     }
-
+    
     func testNestedIfNotTaken() {
         checkEvalSuccess("10 1 IF 0 IF 20 THEN THEN .", expectedOutput: "10 ")
     }
-
+    
     func testNestedIfTaken() {
         checkEvalSuccess("10 1 IF 1 IF 20 THEN THEN .", expectedOutput: "20 ")
     }
@@ -105,7 +105,7 @@ class EvaluatorTest : XCTestCase {
     func testElseTaken() {
         checkEvalSuccess("10 0 IF 20 ELSE 30 THEN .", expectedOutput: "30 ")
     }
-
+    
     func testElseNotTaken() {
         checkEvalSuccess("10 1 IF 20 ELSE 30 THEN .", expectedOutput: "20 ")
     }
@@ -113,7 +113,7 @@ class EvaluatorTest : XCTestCase {
     func testUnterminatedIfInDefinition() {
         checkEvalFailure(": foo 1 IF 20 ELSE 30 ;")
     }
-
+    
     func testElseWithoutIf() {
         checkEvalFailure("ELSE")
     }
@@ -129,7 +129,7 @@ class EvaluatorTest : XCTestCase {
     func testEmitEmptyStack() {
         checkEvalFailure("EMIT")
     }
-
+    
     func testCR() {
         checkEvalSuccess("CR", expectedOutput: "\r")
     }

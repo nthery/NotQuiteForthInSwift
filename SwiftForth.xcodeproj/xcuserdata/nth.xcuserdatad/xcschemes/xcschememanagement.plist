@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>SwiftForthKit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>SwiftForthTests.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -17,6 +22,16 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>73005344198282DA0041266D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7300534E198282DA0041266D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>730AB44719780478002B055B</key>
 		<dict>
 			<key>primary</key>
