@@ -192,6 +192,28 @@ class MulTest : EvaluatorTest {
     }
 }
 
+class DivTest : EvaluatorTest {
+    func testBinaryWithoutTruncation() {
+        checkEvalSuccess("6 2 / .", expectedOutput: "3 ")
+    }
+    
+    func testBinaryWithTruncation() {
+        checkEvalSuccess("6 4 / .", expectedOutput: "1 ")
+    }
+    
+    func testByZero() {
+        checkEvalFailure("6 0 / .")
+    }
+    
+    func testWithoutOperand() {
+        checkEvalFailure("/")
+    }
+    
+    func testWithSingleOperand() {
+        checkEvalFailure("1 /")
+    }
+}
+
 class DictionaryTest : XCTestCase {
     var dict = Dictionary()
     

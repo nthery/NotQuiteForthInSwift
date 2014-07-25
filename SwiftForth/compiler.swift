@@ -171,6 +171,7 @@ class Compiler : ErrorRaiser {
         dictionary.appendPhrase("+", phrase: [.Add])
         dictionary.appendPhrase("-", phrase: [.Sub])
         dictionary.appendPhrase("*", phrase: [.Mul])
+        dictionary.appendPhrase("/", phrase: [.Div])
         dictionary.appendPhrase(".", phrase: [.Dot])
         dictionary.appendPhrase("EMIT", phrase: [.Emit])
         

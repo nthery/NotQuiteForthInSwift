@@ -26,6 +26,7 @@ enum Instruction {
     case Add
     case Sub
     case Mul
+    case Div
     case Dot
     case PushConstant(Int)
     case Call(CompiledPhrase)
@@ -42,6 +43,8 @@ enum Instruction {
             return "sub"
         case Mul:
             return "mul"
+        case Div:
+            return "div"
         case Dot:
             return "dot"
         case let PushConstant(k):
@@ -114,6 +117,20 @@ class VM : ErrorRaiser {
                 let rhs = self.argStack.pop()
                 let lhs = self.argStack.pop()
                 self.argStack.push(lhs * rhs)
+            }
+        case .Div:
+            if argStack.count >= 2 {
+                let rhs = self.argStack.pop()
+                let lhs = self.argStack.pop()
+                if rhs != 0 {
+                    self.argStack.push(lhs / rhs)
+                } else {
+                    error("division by zero")
+                    ok = false
+                }
+            } else {
+                error("div: not enough operands")
+                ok = false
             }
         case .Call(let phrase):
             if !execPhrase(phrase) {

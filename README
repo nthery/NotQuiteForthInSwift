@@ -11,8 +11,7 @@ FEATURES
 * read-eval-print loop.
 * Forth API (Evaluator.eval()).
 * Pushing integers on stack.
-* Addition, subtraction and multiplication.  Implementing other arithmetic operators is left as an
-  exercise to the reader.
+* Addition, subtraction, multiplication and division.
 * Defining new words.
 * IF ELSE THEN.
 * EMIT.
