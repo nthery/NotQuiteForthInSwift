@@ -26,7 +26,7 @@ func repl() {
     evaluator.setErrorHandler(ErrorPrinter())
     
     while true {
-        println("[ \(evaluator.argStack.asString) ]")
+        println("[ \(evaluator.argStack) ]")
         print("==> ")
         let input = reader.read()
         if input.isEmpty {

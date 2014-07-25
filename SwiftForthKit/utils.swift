@@ -24,7 +24,7 @@ func splitInBlankSeparatedWords(input: String) -> [String] {
     return output
 }
 
-public class ForthStack<T> {
+public class ForthStack<T> : Printable {
     var items = [T]()
     
     public var isEmpty : Bool {
@@ -47,7 +47,7 @@ public class ForthStack<T> {
         return items[items.count-1]
     }
     
-    public var asString : String {
+    public var description : String {
         var acc = ""
         for i in items {
             acc += "\(i) "
