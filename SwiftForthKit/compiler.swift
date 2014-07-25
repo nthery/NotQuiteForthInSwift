@@ -121,15 +121,6 @@ class Compiler : ErrorRaiser {
             }
         }
         
-        var isWaitingName : Bool {
-            switch self {
-            case .WaitingName:
-                return true
-            default:
-                return false
-            }
-        }
-        
         var name : String? {
             switch self {
             case .CompilingBody(let name):
@@ -190,16 +181,15 @@ class Compiler : ErrorRaiser {
         
         for token in tokens {
             debug("Processing token: \(token) definitionState: \(definitionState)")
-            if definitionState.isWaitingName {
+            switch definitionState {
+            case .WaitingName:
                 if token.toForthInt() || dictionary.isSpecialForm(token) {
                     error("word expected after ':' (parsed \(token))")
                     return nil
                 }
                 definitionState = .CompilingBody(token)
-            } else {
-                let success = compileToken(token)
-                if !success {
-                    resetAfterError()
+            default:
+                if !compileToken(token) {
                     return nil
                 }
             }
