@@ -4,22 +4,21 @@
 
 import Foundation
 
-// TODO: Nest in Instruction.
-enum BranchCondition : Printable {
-    case Always, IfZero
-    
-    var description : String {
+// The instructions the virtual machine supports.
+enum Instruction : Printable {
+    enum BranchCondition : Printable {
+        case Always, IfZero
+        
+        var description : String {
         switch self {
         case Always:
             return "always"
         case IfZero:
             return "ifZero"
+            }
         }
     }
-}
 
-// The instructions the virtual machine supports.
-enum Instruction : Printable {
     case Nop
     case Add
     case Sub
@@ -30,7 +29,7 @@ enum Instruction : Printable {
     case Call(name: String, CompiledPhrase)
     case Emit
     case Branch(BranchCondition, CompiledPhrase.Address?)
-    
+
     var description : String {
         switch self {
         case Nop:
@@ -170,7 +169,7 @@ class VM : ErrorRaiser {
         return pc + 1
     }
     
-    func conditionIsTrue(condition: BranchCondition) -> Bool {
+    func conditionIsTrue(condition: Instruction.BranchCondition) -> Bool {
         switch condition {
         case .Always:
             return true

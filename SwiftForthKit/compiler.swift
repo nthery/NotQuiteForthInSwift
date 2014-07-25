@@ -89,7 +89,7 @@ class PhraseBuilder {
         return phrase.count - 1
     }
     
-    func appendForwardBranch(condition: BranchCondition) -> CompiledPhrase.Address {
+    func appendForwardBranch(condition: Instruction.BranchCondition) -> CompiledPhrase.Address {
         ++forwardBranchCount
         phrase += .Branch(condition, nil)
         return phrase.count - 1
