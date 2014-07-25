@@ -107,7 +107,7 @@ class PhraseBuilder {
 
 // The compiler entry point and heart.
 class Compiler : ErrorRaiser {
-    enum DefinitionState {
+    enum DefinitionState : Printable {
         case None
         case WaitingName
         case CompilingBody(String)
@@ -139,8 +139,7 @@ class Compiler : ErrorRaiser {
                 }
         }
         
-        // TODO: is there a less verbose way of printing enum?
-        func description() -> String {
+        var description : String {
             switch self {
             case .None:
                 return ".None"
@@ -190,7 +189,7 @@ class Compiler : ErrorRaiser {
         let tokens = splitInBlankSeparatedWords(input)
         
         for token in tokens {
-            debug("token: \(token)")
+            debug("Processing token: \(token) definitionState: \(definitionState)")
             if definitionState.isWaitingName {
                 if token.toForthInt() || dictionary.isSpecialForm(token) {
                     error("word expected after ':' (parsed \(token))")
