@@ -18,21 +18,8 @@ extension String {
 // Either a special form, evaluated at compile time, or a regular word, evaluated at runtime.
 struct Definition {
     enum Body {
-        // TODO: The initial idea was to associate a closure containing code to execute 
-        // when compiling the special form.  However, this triggers lots of weird behavior
-        // from the Swift compiler so use a string for the time being.
-        case SpecialForm(handler: String)
-        
+        case SpecialForm
         case Regular(phrase: CompiledPhrase)
-        
-        var isSpecialForm : Bool {
-            switch self {
-            case .SpecialForm(_):
-                return true
-            default:
-                return false
-            }
-        }
     }
     
     let name: String
@@ -52,8 +39,8 @@ class Dictionary {
         content.append(Definition(name: name, body: .Regular(phrase: CompiledPhrase(instructions: phrase))))
     }
     
-    func appendSpecialForm(name: String, handler: String) {
-        content.append(Definition(name: name, body: .SpecialForm(handler: handler)))
+    func appendSpecialForm(name: String) {
+        content.append(Definition(name: name, body: .SpecialForm))
     }
     
     subscript(name: String) -> Definition? {
@@ -67,8 +54,11 @@ class Dictionary {
     
     func isSpecialForm(name: String) -> Bool {
         if let def = self[name] {
-            if def.body.isSpecialForm {
+            switch def.body {
+            case .SpecialForm:
                 return true
+            default:
+                return false
             }
         }
         return false
@@ -175,11 +165,11 @@ class Compiler : ErrorRaiser {
         dictionary.appendPhrase(".", phrase: [.Dot])
         dictionary.appendPhrase("EMIT", phrase: [.Emit])
         
-        dictionary.appendSpecialForm(":", handler: ":")
-        dictionary.appendSpecialForm(";", handler: ";")
-        dictionary.appendSpecialForm("IF", handler: "IF")
-        dictionary.appendSpecialForm("THEN", handler: "THEN")
-        dictionary.appendSpecialForm("ELSE", handler: "ELSE")
+        dictionary.appendSpecialForm(":")
+        dictionary.appendSpecialForm(";")
+        dictionary.appendSpecialForm("IF")
+        dictionary.appendSpecialForm("THEN")
+        dictionary.appendSpecialForm("ELSE")
     }
     
     override func resetAfterError() {
@@ -225,8 +215,8 @@ class Compiler : ErrorRaiser {
             phraseBeingCompiled.appendInstruction(.PushConstant(n))
         } else if let def = dictionary[token] {
             switch def.body {
-            case .SpecialForm(let handler):
-                let success = compileSpecialForm(handler)
+            case .SpecialForm:
+                let success = compileSpecialForm(token)
                 if !success {
                     return false
                 }
@@ -243,9 +233,11 @@ class Compiler : ErrorRaiser {
     
     // Deal with words evaluated at compile-time.  Return true on
     // success.
-    //  TODO: See Definition.Body.SpecialForm comment.
-    func compileSpecialForm(handler: String) -> Bool {
-        switch (handler) {
+    // TODO: The initial idea was to associate Body.SpecialForm with a closure.
+    // However, this triggers lots of weird behavior from the Swift compiler so
+    // use the special form name for the time being.
+    func compileSpecialForm(name: String) -> Bool {
+        switch (name) {
         case ":":
             definitionState = .WaitingName
         case ";":
