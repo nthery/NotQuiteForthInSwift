@@ -33,7 +33,7 @@ class EvaluatorTest : XCTestCase {
     
     func checkEvalSuccess(input: String, expectedOutput: String) {
         XCTAssert(evaluator.eval(input))
-        let actualOutput = evaluator.readAndResetOutput()
+        let actualOutput = evaluator.getAndResetOutput()
         XCTAssertEqual(expectedOutput, actualOutput)
     }
     

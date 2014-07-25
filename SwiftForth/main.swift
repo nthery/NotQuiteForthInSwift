@@ -33,7 +33,7 @@ func repl() {
             break
         }
         evaluator.eval(input)
-        print(evaluator.readAndResetOutput())
+        print(evaluator.getAndResetOutput())
     }
 }
 
