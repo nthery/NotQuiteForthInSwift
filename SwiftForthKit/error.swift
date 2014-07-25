@@ -18,12 +18,12 @@ public enum Result {
 }
 
 // Clients must implement this protocol to be notified on error.
-public protocol ErrorHandler {
+public protocol ForthErrorHandler {
     func HandleError(msg: String)
 }
 
 // An error handler that discards all errors.
-class NullErrorHandler : ErrorHandler {
+class NullErrorHandler : ForthErrorHandler {
     func HandleError(msg: String) {
         // nop
     }
@@ -31,7 +31,7 @@ class NullErrorHandler : ErrorHandler {
 
 // Abstract base class for classes that raise errors.
 class ErrorRaiser {
-    var errorHandler : ErrorHandler = NullErrorHandler()
+    var errorHandler : ForthErrorHandler = NullErrorHandler()
     
     // Report an error and rollback to consistent state for error recovery.
     func error(msg: String) {

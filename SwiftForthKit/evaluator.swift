@@ -4,7 +4,7 @@
 
 import Foundation
 
-public class Evaluator {
+public class ForthEvaluator {
     let compiler = Compiler()
     let vm = VM()
     
@@ -13,7 +13,7 @@ public class Evaluator {
         evalOrDie(": CR 13 EMIT ;")
     }
     
-    public func setErrorHandler(handler: ErrorHandler) {
+    public func setErrorHandler(handler: ForthErrorHandler) {
         compiler.errorHandler = handler
         vm.errorHandler = handler
     }
@@ -24,7 +24,7 @@ public class Evaluator {
         return o
     }
     
-    public var argStack : Stack<Int> {
+    public var argStack : ForthStack<Int> {
         return vm.argStack
     }
     

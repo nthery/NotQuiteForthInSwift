@@ -9,7 +9,7 @@ FEATURES
 ========
 
 * read-eval-print loop.
-* Forth API (Evaluator.eval()).
+* Forth API (ForthEvaluator.eval()).
 * Pushing integers on stack.
 * Addition, subtraction, multiplication and division.
 * Defining new words.
@@ -28,7 +28,7 @@ immediate mode.
 
 The VM class interprets virtual machine code.
 
-The Evaluator class coordinates the compiler and VM.
+The ForthEvaluator class coordinates the compiler and VM.
 
 BACKLOG
 =======

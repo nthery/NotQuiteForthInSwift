@@ -5,7 +5,7 @@
 import Foundation
 import SwiftForthKit
 
-class ErrorPrinter : ErrorHandler {
+class ErrorPrinter : ForthErrorHandler {
     func HandleError(msg: String) {
         println("ERROR: \(msg)")
     }
@@ -22,7 +22,7 @@ class StdinLineReader {
 
 func repl() {
     var reader = StdinLineReader()
-    var evaluator = Evaluator()
+    var evaluator = ForthEvaluator()
     evaluator.setErrorHandler(ErrorPrinter())
     
     while true {

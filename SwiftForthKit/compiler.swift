@@ -163,7 +163,7 @@ class Compiler : ErrorRaiser {
     }
 
     var definitionState = DefinitionState.None
-    var ifStack = Stack<Address>()
+    var ifStack = ForthStack<Address>()
     var dictionary = Dictionary()
     var phraseBeingCompiled = PhraseBuilder()
 
@@ -184,7 +184,7 @@ class Compiler : ErrorRaiser {
     
     override func resetAfterError() {
         definitionState = DefinitionState.None
-        ifStack = Stack<Address>()
+        ifStack = ForthStack<Address>()
         phraseBeingCompiled = PhraseBuilder()
     }
     

@@ -9,7 +9,7 @@
 import Foundation
 import XCTest
 
-class ErrorCounter : ErrorHandler {
+class ErrorCounter : ForthErrorHandler {
     var errors = 0
     
     func HandleError(msg: String) {
@@ -17,14 +17,14 @@ class ErrorCounter : ErrorHandler {
     }
 }
 
-class FailOnError : ErrorHandler {
+class FailOnError : ForthErrorHandler {
     func HandleError(msg: String) {
         XCTFail("unexpected evaluator error")
     }
 }
 
 class EvaluatorTest : XCTestCase {
-    var evaluator = Evaluator()
+    var evaluator = ForthEvaluator()
     var errors = 0
     
     override func setUp() {

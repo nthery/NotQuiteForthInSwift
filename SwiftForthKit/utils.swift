@@ -24,7 +24,7 @@ func splitInBlankSeparatedWords(input: String) -> [String] {
     return output
 }
 
-public class Stack<T> {
+public class ForthStack<T> {
     var items = [T]()
     
     public var isEmpty : Bool {

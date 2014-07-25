@@ -89,11 +89,11 @@ func compiledPhraseAsAString(phrase: CompiledPhrase) -> String {
 
 // Forth virtual machine
 class VM : ErrorRaiser {
-    var argStack = Stack<Int>()
+    var argStack = ForthStack<Int>()
     var output = ""
     
     override func resetAfterError() {
-        argStack = Stack<Int>()
+        argStack = ForthStack<Int>()
     }
     
     // Execute phrase and return true on success or false if a runtime error occurred.
