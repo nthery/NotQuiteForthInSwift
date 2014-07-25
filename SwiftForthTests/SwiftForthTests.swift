@@ -54,22 +54,6 @@ class EvaluatorTest : XCTestCase {
         checkEvalFailure(".")
     }
 
-    func testOnePlusTwo() {
-        checkEvalSuccess("1 2 + .", expectedOutput: "3 ")
-    }
-    
-    func testOnePlusTwoPlusThree() {
-        checkEvalSuccess("1 2 + 3 + .", expectedOutput: "6 ")
-    }
-
-    func testAddWithoutOperand() {
-        checkEvalFailure("+")
-    }
-    
-    func testAddWithSingleOperand() {
-        checkEvalFailure("1 +")
-    }
-    
     func testConstant() {
         checkEvalSuccess(": k 42 ;", expectedOutput: "")
         checkEvalSuccess("k 1 + .", expectedOutput: "43 ")
@@ -148,6 +132,25 @@ class EvaluatorTest : XCTestCase {
 
     func testCR() {
         checkEvalSuccess("CR", expectedOutput: "\r")
+    }
+}
+
+class AddTest : EvaluatorTest {
+    func testBinary() {
+        checkEvalSuccess("1 2 + .", expectedOutput: "3 ")
+    }
+    
+    func testTernary() {
+        checkEvalSuccess("1 2 + 3 + .", expectedOutput: "6 ")
+        checkEvalSuccess("1 2 3 + + .", expectedOutput: "6 ")
+    }
+    
+    func testWithoutOperand() {
+        checkEvalFailure("+")
+    }
+    
+    func testWithSingleOperand() {
+        checkEvalFailure("1 +")
     }
 }
 
