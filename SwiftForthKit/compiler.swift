@@ -143,11 +143,15 @@ class Compiler : ErrorRaiser {
     }
 
     var definitionState = DefinitionState.None
-    var ifStack = ForthStack<CompiledPhrase.Address>()
     var dictionary = Dictionary()
     var phraseBeingCompiled = PhraseBuilder()
+    var ifCompilerHelper : IfCompilerHelper!
 
     init() {
+        super.init()
+
+        ifCompilerHelper = IfCompilerHelper(compiler: self)
+
         dictionary.appendPhrase("+", phrase: [.Add])
         dictionary.appendPhrase("-", phrase: [.Sub])
         dictionary.appendPhrase("*", phrase: [.Mul])
@@ -164,14 +168,12 @@ class Compiler : ErrorRaiser {
     
     override func resetAfterError() {
         definitionState = DefinitionState.None
-        ifStack = ForthStack<CompiledPhrase.Address>()
+        ifCompilerHelper = IfCompilerHelper(compiler: self)
         phraseBeingCompiled = PhraseBuilder()
     }
     
     var isCompiling : Bool {
-        get {
-            return !ifStack.isEmpty || definitionState.isDefining
-        }
+        return ifCompilerHelper.isCompiling || definitionState.isDefining
     }
 
     // Transform source string into compiled phrase.  Return phrase on success
@@ -226,44 +228,82 @@ class Compiler : ErrorRaiser {
     // However, this triggers lots of weird behavior from the Swift compiler so
     // use the special form name for the time being.
     func compileSpecialForm(name: String) -> Bool {
+        var success = true
+
         switch (name) {
         case ":":
             definitionState = .WaitingName
         case ";":
             if let name = definitionState.name {
-                if !ifStack.isEmpty {
+                if ifCompilerHelper.isCompiling {
                     error("unterminated IF in definition")
-                    return false
+                    success = false
+                } else {
+                    dictionary.append(Definition(name: name, body: .Regular(phrase: phraseBeingCompiled.getAndReset())))
+                    definitionState = .None
                 }
-                dictionary.append(Definition(name: name, body: .Regular(phrase: phraseBeingCompiled.getAndReset())))
-                definitionState = .None
             } else {
                 error("unexpected ;")
-                return false
+                success = false
             }
         case "IF":
-            ifStack.push(phraseBeingCompiled.appendForwardBranch(.IfZero))
+            success = ifCompilerHelper.onIf()
         case "THEN":
-            if ifStack.isEmpty {
-                error("THEN without IF")
-                return false
-            }
-            let target = phraseBeingCompiled.appendInstruction(.Nop) // ensure there is an insn at jump target
-            let ifAddress = ifStack.pop()
-            phraseBeingCompiled.patchBranchAt(ifAddress, withTarget: target)
+            success = ifCompilerHelper.onThen()
         case "ELSE":
-            if ifStack.isEmpty {
-                error("ELSE without IF")
-                return false
-            }
-            let ifAddress = ifStack.pop()
-            let elseAddress = phraseBeingCompiled.appendForwardBranch(.Always)
-            phraseBeingCompiled.patchBranchAt(ifAddress, withTarget: phraseBeingCompiled.nextAddress)
-            ifStack.push(elseAddress)
+            success = ifCompilerHelper.onElse()
         default:
             assert(false, "bad special form")
         }
         
+        return success
+    }
+}
+
+// Abstract base class for helper classes Compiler delegate to.
+class AbstractCompilerHelper {
+    init(compiler: Compiler) {
+        self.compiler = compiler
+    }
+
+    let isCompiling = false
+
+    unowned let compiler: Compiler
+}
+
+// Handle compilation of IF [ELSE] THEN special forms.
+class IfCompilerHelper : AbstractCompilerHelper {
+    override var isCompiling : Bool {
+        return !stack.isEmpty
+    }
+
+    func onIf() -> Bool {
+        stack.push(compiler.phraseBeingCompiled.appendForwardBranch(.IfZero))
         return true
     }
+
+    func onElse() -> Bool {
+        if stack.isEmpty {
+            compiler.error("ELSE without IF")
+            return false
+        }
+        let ifAddress = stack.pop()
+        let elseAddress = compiler.phraseBeingCompiled.appendForwardBranch(.Always)
+        compiler.phraseBeingCompiled.patchBranchAt(ifAddress, withTarget: compiler.phraseBeingCompiled.nextAddress)
+        stack.push(elseAddress)
+        return true
+    }
+
+    func onThen() -> Bool {
+        if stack.isEmpty {
+            compiler.error("THEN without IF")
+            return false
+        }
+        let target = compiler.phraseBeingCompiled.appendInstruction(.Nop) // ensure there is an insn at jump target
+        let ifAddress = stack.pop()
+        compiler.phraseBeingCompiled.patchBranchAt(ifAddress, withTarget: target)
+        return true
+    }
+
+    let stack = ForthStack<CompiledPhrase.Address>()
 }
