@@ -154,6 +154,25 @@ class AddTest : EvaluatorTest {
     }
 }
 
+class SubTest : EvaluatorTest {
+    func testNegativeConstant() {
+        checkEvalSuccess("-1 .", expectedOutput: "-1 ")
+    }
+    
+    func testBinary() {
+        checkEvalSuccess("3 2 - .", expectedOutput: "1 ")
+        checkEvalSuccess("2 3 - .", expectedOutput: "-1 ")
+    }
+    
+    func testWithoutOperand() {
+        checkEvalFailure("-")
+    }
+    
+    func testWithSingleOperand() {
+        checkEvalFailure("1 -")
+    }
+}
+
 class MulTest : EvaluatorTest {
     func testBinary() {
         checkEvalSuccess("2 3 * .", expectedOutput: "6 ")
