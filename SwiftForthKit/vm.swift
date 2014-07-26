@@ -26,9 +26,12 @@ enum Instruction : Printable {
     case Div
     case Dot
     case PushConstant(Int)
+    case PushControlStackTop
     case Call(name: String, CompiledPhrase)
     case Emit
     case Branch(BranchCondition, CompiledPhrase.Address?)
+    case Do
+    case Loop(CompiledPhrase.Address)
 
     var description : String {
         switch self {
@@ -46,23 +49,28 @@ enum Instruction : Printable {
             return "dot"
         case let PushConstant(k):
             return "pushConstant(\(k))"
-        // TODO: add name in CompiledPhrease for disassembly
+        case PushControlStackTop:
+            return "pushControlStackTop"
         case let Call(name, _):
             return "call(\(name))"
         case Emit:
             return "emit"
         case let Branch(condition, address):
             return "branch(\(condition), address)"
+        case Do:
+            return "do"
+        case let Loop(address):
+            return "loop(\(address))"
         }
     }
 
     var expectedArgumentCount : Int {
     switch self {
-    case Nop, .PushConstant, Call:
+    case Nop, .PushConstant, PushControlStackTop, Call, Loop:
         return 0
     case Dot, Emit:
         return 1
-    case Add, Sub, Mul, Div:
+    case Add, Sub, Mul, Div, Do:
         return 2
     case PushConstant:
         return 0
@@ -99,10 +107,12 @@ struct CompiledPhrase : Printable {
 // Forth virtual machine
 class VM : ErrorRaiser {
     var argStack = ForthStack<Int>()
+    var controlStack = ForthStack<Int>()
     var output = ""
     
     override func resetAfterError() {
         argStack = ForthStack<Int>()
+        controlStack = ForthStack<Int>()
     }
     
     // Execute phrase and return true on success or false if a runtime error occurred.
@@ -121,6 +131,8 @@ class VM : ErrorRaiser {
     // Execute single instruction and return new PC on success or nil if a runtime
     // error occurred.
     func execInstruction(pc: Int, insn: Instruction) -> Int? {
+        debug("Executing \(insn) @ \(pc) with argStack [ \(argStack) ] controlStack [ \(controlStack) ]")
+
         if argStack.count < insn.expectedArgumentCount {
             error("\(insn): expected \(insn.expectedArgumentCount) argument(s) but got \(argStack.count)")
             return nil
@@ -154,6 +166,13 @@ class VM : ErrorRaiser {
             }
         case .PushConstant(let k):
             argStack.push(k)
+        case .PushControlStackTop:
+            if controlStack.count >= 1 {
+                argStack.push(controlStack.top())
+            } else {
+                error("I: not enough arguments on control stack")
+                return nil
+            }
         case .Dot:
             self.output += "\(self.argStack.pop()) "
         case .Nop:
@@ -164,6 +183,26 @@ class VM : ErrorRaiser {
             }
         case .Emit:
             self.output += String(fromAsciiCode: self.argStack.pop())
+        case .Do:
+            let limit = argStack.pop()
+            let base = argStack.pop()
+            controlStack.push(limit)
+            controlStack.push(base)
+        case let .Loop(address):
+            if controlStack.count >= 2 {
+                controlStack.push(controlStack.pop() + 1)
+                if controlStack.top() < controlStack.top(offsetFromTop: 1) {
+                    // Loop back to beginning.
+                    return address
+                } else {
+                    // Cleanup index and limit.
+                    controlStack.pop()
+                    controlStack.pop()
+                }
+            } else {
+                error("LOOP: not enough arguments on control stack")
+                return nil
+            }
         }
         
         return pc + 1

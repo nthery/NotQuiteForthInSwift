@@ -43,8 +43,10 @@ public class ForthStack<T> : Printable {
         return items.removeLast()
     }
     
-    public func top() -> T {
-        return items[items.count-1]
+    // Return most recently pushed item by default or item at specified
+    // offset from stack top.
+    public func top(offsetFromTop: Int = 0) -> T {
+        return items[items.count - 1 - offsetFromTop]
     }
     
     public var description : String {

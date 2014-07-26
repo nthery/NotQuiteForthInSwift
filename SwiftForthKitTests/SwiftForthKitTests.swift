@@ -211,6 +211,45 @@ class DivTest : EvaluatorTest {
     }
 }
 
+class CountedLoopTest : EvaluatorTest {
+    func testLoopOnceWhenBaseLessThanLimit() {
+        checkEvalSuccess("10 1 2 DO I + LOOP .", expectedOutput: "11 ")
+    }
+
+    func testLoopOnceWhenBaseEqualLimit() {
+        checkEvalSuccess("10 1 1 DO I + LOOP .", expectedOutput: "11 ")
+    }
+
+    func testLoopTwice() {
+        checkEvalSuccess("10 1 3 DO I + LOOP .", expectedOutput: "13 ")
+    }
+
+    func testLoopWithoutDo() {
+        checkEvalFailure("LOOP")
+    }
+
+    func testDefinitionWithDoWithoutLoop() {
+        checkEvalFailure(": foo DO ;")
+    }
+
+    func testImmediateDoWithoutLoop() {
+        checkEvalSuccess("0 1 DO 65 EMIT", expectedOutput: "")
+        checkEvalSuccess("LOOP", expectedOutput: "A")
+    }
+
+    func testDoWithoutArgument() {
+        checkEvalFailure("DO LOOP")
+    }
+
+    func testDoWithOneArgument() {
+        checkEvalFailure("1 DO LOOP")
+    }
+
+    func testIOutsideOfLoop() {
+        checkEvalFailure("I")
+    }
+}
+
 class DictionaryTest : XCTestCase {
     var dict = Dictionary()
     

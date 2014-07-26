@@ -36,9 +36,11 @@ BACKLOG
 =======
 
 TODO: test stack level at end of tests
-TODO: add support for loops
+TODO: add support for while loops
 TODO: add support for more primitive Forth words
 TODO: test recursivity (fibonnacci)
+TODO: add support for strings
+TODO: add support for arrays and pointers
 
 
 

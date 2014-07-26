@@ -146,11 +146,13 @@ class Compiler : ErrorRaiser {
     var dictionary = Dictionary()
     var phraseBeingCompiled = PhraseBuilder()
     var ifCompilerHelper : IfCompilerHelper!
+    var loopCompilerHelper : LoopCompilerHelper!
 
     init() {
         super.init()
 
         ifCompilerHelper = IfCompilerHelper(compiler: self)
+        loopCompilerHelper = LoopCompilerHelper(compiler: self)
 
         dictionary.appendPhrase("+", phrase: [.Add])
         dictionary.appendPhrase("-", phrase: [.Sub])
@@ -158,22 +160,27 @@ class Compiler : ErrorRaiser {
         dictionary.appendPhrase("/", phrase: [.Div])
         dictionary.appendPhrase(".", phrase: [.Dot])
         dictionary.appendPhrase("EMIT", phrase: [.Emit])
+        dictionary.appendPhrase("I", phrase: [.PushControlStackTop])
         
         dictionary.appendSpecialForm(":")
         dictionary.appendSpecialForm(";")
         dictionary.appendSpecialForm("IF")
         dictionary.appendSpecialForm("THEN")
         dictionary.appendSpecialForm("ELSE")
+        dictionary.appendSpecialForm("DO")
+        dictionary.appendSpecialForm("LOOP")
     }
     
     override func resetAfterError() {
         definitionState = DefinitionState.None
         ifCompilerHelper = IfCompilerHelper(compiler: self)
+        loopCompilerHelper = LoopCompilerHelper(compiler: self)
         phraseBeingCompiled = PhraseBuilder()
     }
     
     var isCompiling : Bool {
-        return ifCompilerHelper.isCompiling || definitionState.isDefining
+        return ifCompilerHelper.isCompiling || loopCompilerHelper.isCompiling ||
+            definitionState.isDefining
     }
 
     // Transform source string into compiled phrase.  Return phrase on success
@@ -238,6 +245,10 @@ class Compiler : ErrorRaiser {
                 if ifCompilerHelper.isCompiling {
                     error("unterminated IF in definition")
                     success = false
+                } else if loopCompilerHelper.isCompiling {
+                     // TODO: Change message or logic if LoopCompilerHelper extended for other kinds of loops.
+                    error("unterminated DO in definition")
+                    success = false
                 } else {
                     dictionary.append(Definition(name: name, body: .Regular(phrase: phraseBeingCompiled.getAndReset())))
                     definitionState = .None
@@ -252,6 +263,10 @@ class Compiler : ErrorRaiser {
             success = ifCompilerHelper.onThen()
         case "ELSE":
             success = ifCompilerHelper.onElse()
+        case "DO":
+            success = loopCompilerHelper.onDo()
+        case "LOOP":
+            success = loopCompilerHelper.onLoop()
         default:
             assert(false, "bad special form")
         }
@@ -302,6 +317,31 @@ class IfCompilerHelper : AbstractCompilerHelper {
         let target = compiler.phraseBeingCompiled.appendInstruction(.Nop) // ensure there is an insn at jump target
         let ifAddress = stack.pop()
         compiler.phraseBeingCompiled.patchBranchAt(ifAddress, withTarget: target)
+        return true
+    }
+
+    let stack = ForthStack<CompiledPhrase.Address>()
+}
+
+// Handle compilation of DO LOOP.
+class LoopCompilerHelper : AbstractCompilerHelper {
+    override var isCompiling : Bool {
+        return !stack.isEmpty
+    }
+
+    func onDo() -> Bool {
+        compiler.phraseBeingCompiled.appendInstruction(.Do)
+        stack.push(compiler.phraseBeingCompiled.nextAddress)
+        return true
+    }
+
+    func onLoop() -> Bool {
+        if stack.isEmpty {
+            compiler.error("LOOP without DO")
+            return false
+        }
+        let doAddress = stack.pop()
+        compiler.phraseBeingCompiled.appendInstruction(.Loop(doAddress))
         return true
     }
 
