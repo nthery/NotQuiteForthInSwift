@@ -154,6 +154,9 @@ class Compiler : ErrorRaiser {
         ifCompilerHelper = IfCompilerHelper(compiler: self)
         loopCompilerHelper = LoopCompilerHelper(compiler: self)
 
+        // Register all primitives.
+        // TODO: Compiler hangs when turning this into a loop over an array
+        // containing the primitives.
         dictionary.appendPhrase("+", phrase: [.Add])
         dictionary.appendPhrase("-", phrase: [.Sub])
         dictionary.appendPhrase("*", phrase: [.Mul])
@@ -162,6 +165,7 @@ class Compiler : ErrorRaiser {
         dictionary.appendPhrase("EMIT", phrase: [.Emit])
         dictionary.appendPhrase("I", phrase: [.PushControlStackTop])
         
+        // Register all special forms.
         dictionary.appendSpecialForm(":")
         dictionary.appendSpecialForm(";")
         dictionary.appendSpecialForm("IF")
