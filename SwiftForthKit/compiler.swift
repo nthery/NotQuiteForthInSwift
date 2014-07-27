@@ -193,7 +193,7 @@ class Compiler : ErrorRaiser {
         let tokens = splitInBlankSeparatedWords(input)
         
         for token in tokens {
-            debug("Processing token: \(token) definitionState: \(definitionState)")
+            debug(debugMaskCompiler, "Processing token: \(token) definitionState: \(definitionState)")
             switch definitionState {
             case .WaitingName:
                 if token.toForthInt() || dictionary.isSpecialForm(token) {

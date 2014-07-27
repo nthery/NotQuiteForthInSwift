@@ -23,6 +23,8 @@
 		7300536E198287FF0041266D /* utils_test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F06F197D263C006DC1EB /* utils_test.swift */; };
 		7300536F19828B050041266D /* evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F79375197D57E0000BA52F /* evaluator.swift */; };
 		730AB44C19780478002B055B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730AB44B19780478002B055B /* main.swift */; };
+		735099351984E8E600F37E8C /* debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735099341984E8E600F37E8C /* debug.swift */; };
+		735099361984E8E600F37E8C /* debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735099341984E8E600F37E8C /* debug.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,7 @@
 		730AB44B19780478002B055B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		73211489197D8CB2007799A4 /* error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = error.swift; sourceTree = "<group>"; };
 		734A4735197AE1E300FD038A /* compiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = compiler.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		735099341984E8E600F37E8C /* debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = debug.swift; sourceTree = "<group>"; };
 		7354157A198160ED00B59DF8 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		7376F06C197D25E9006DC1EB /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		7376F06F197D263C006DC1EB /* utils_test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils_test.swift; sourceTree = "<group>"; };
@@ -116,6 +119,7 @@
 				73211489197D8CB2007799A4 /* error.swift */,
 				73005349198282DA0041266D /* SwiftForthKit.h */,
 				73005347198282DA0041266D /* Supporting Files */,
+				735099341984E8E600F37E8C /* debug.swift */,
 			);
 			path = SwiftForthKit;
 			sourceTree = "<group>";
@@ -307,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7300535F1982838A0041266D /* compiler.swift in Sources */,
+				735099351984E8E600F37E8C /* debug.swift in Sources */,
 				73005362198283960041266D /* evaluator.swift in Sources */,
 				73005363198283960041266D /* error.swift in Sources */,
 				73005361198283960041266D /* vm.swift in Sources */,
@@ -323,6 +328,7 @@
 				7300536E198287FF0041266D /* utils_test.swift in Sources */,
 				73005364198283DB0041266D /* compiler.swift in Sources */,
 				73005366198283DB0041266D /* vm.swift in Sources */,
+				735099361984E8E600F37E8C /* debug.swift in Sources */,
 				73005368198283DB0041266D /* error.swift in Sources */,
 				73005357198282DA0041266D /* SwiftForthKitTests.swift in Sources */,
 			);
