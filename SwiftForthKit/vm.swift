@@ -131,7 +131,7 @@ class VM : ErrorRaiser {
     // Execute single instruction and return new PC on success or nil if a runtime
     // error occurred.
     func execInstruction(pc: Int, insn: Instruction) -> Int? {
-        debug(debugMaskVm, "Executing \(insn) @ \(pc) with argStack [ \(argStack) ] controlStack [ \(controlStack) ]")
+        debug(.Vm, "Executing \(insn) @ \(pc) with argStack [ \(argStack) ] controlStack [ \(controlStack) ]")
 
         if argStack.count < insn.expectedArgumentCount {
             error("\(insn): expected \(insn.expectedArgumentCount) argument(s) but got \(argStack.count)")

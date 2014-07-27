@@ -8,17 +8,16 @@
 
 import Foundation
 
-// Debug trace masks.
-// TODO: Tried to use an enum initially but could not trick compiler
-// into compiling "(condition.toRaw() & debugMask) == 0".
-let debugMaskCompiler = 1
-let debugMaskVm = 2
-let debugMaskEvaluator = 4
+enum TraceFlag : UInt {
+    case Evaluator = 0b0001
+    case Compiler = 0b00010
+    case Vm = 0b00100
+}
 
-var debugMask = 0
+var traceMask : UInt = 0
 
-func debug(condition: Int, msg: @auto_closure () -> String) {
-    if (condition & debugMask)  != 0 {
+func debug(condition: TraceFlag, msg: @auto_closure () -> String) {
+    if (condition.toRaw() & traceMask)  != 0 {
         println("[DBG] \(msg())")
     }
 }
