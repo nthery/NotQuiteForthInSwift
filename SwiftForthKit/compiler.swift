@@ -75,13 +75,13 @@ class PhraseBuilder {
     }
     
     func appendInstruction(insn: Instruction) -> CompiledPhrase.Address {
-        phrase += insn
+        phrase += [insn]
         return phrase.count - 1
     }
     
     func appendForwardBranch(condition: Instruction.BranchCondition) -> CompiledPhrase.Address {
         ++forwardBranchCount
-        phrase += .Branch(condition, nil)
+        phrase += [.Branch(condition, nil)]
         return phrase.count - 1
     }
     
@@ -148,7 +148,7 @@ class Compiler : ErrorRaiser {
     var ifCompilerHelper : IfCompilerHelper!
     var loopCompilerHelper : LoopCompilerHelper!
 
-    init() {
+    override init() {
         super.init()
 
         ifCompilerHelper = IfCompilerHelper(compiler: self)
@@ -196,7 +196,7 @@ class Compiler : ErrorRaiser {
             debug(.Compiler, "Processing token: \(token) definitionState: \(definitionState)")
             switch definitionState {
             case .WaitingName:
-                if token.toForthInt() || dictionary.isSpecialForm(token) {
+                if token.toForthInt() != nil || dictionary.isSpecialForm(token) {
                     error("word expected after ':' (parsed \(token))")
                     return nil
                 }

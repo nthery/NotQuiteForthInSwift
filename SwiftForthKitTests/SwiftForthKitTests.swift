@@ -254,12 +254,12 @@ class DictionaryTest : XCTestCase {
     var dict = Dictionary()
     
     func testEmpty() {
-        XCTAssert(!dict["foo"])
+        XCTAssert(dict["foo"] == nil)
     }
     
     func testAddAndLookup() {
         dict.appendPhrase("a", phrase: [.Nop])
         let def = dict["a"]
-        XCTAssert(def && def!.name == "a")
+        XCTAssert(def?.name == "a")
     }
 }

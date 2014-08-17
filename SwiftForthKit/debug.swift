@@ -16,7 +16,7 @@ enum TraceFlag : UInt {
 
 var traceMask : UInt = 0
 
-func debug(condition: TraceFlag, msg: @auto_closure () -> String) {
+func debug(condition: TraceFlag, msg: @autoclosure () -> String) {
     if (condition.toRaw() & traceMask)  != 0 {
         println("[DBG] \(msg())")
     }

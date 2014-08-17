@@ -18,7 +18,7 @@ func splitInBlankSeparatedWords(input: String) -> [String] {
             break
         }
         
-        output += token!
+        output.append(token!)
     }
     
     return output
