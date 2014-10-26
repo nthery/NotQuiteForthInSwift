@@ -16,7 +16,7 @@ class StdinLineReader {
     
     func read() -> String {
         // TODO: broken: read whole file when input is not console
-        return NSString(data: stdin.availableData, encoding: NSUTF8StringEncoding)
+        return NSString(data: stdin.availableData, encoding: NSUTF8StringEncoding)!
     }
 }
 

@@ -285,7 +285,9 @@ class AbstractCompilerHelper {
         self.compiler = compiler
     }
 
-    let isCompiling = false
+    var isCompiling : Bool {
+        return false
+    }
 
     unowned let compiler: Compiler
 }

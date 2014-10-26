@@ -12,7 +12,7 @@ func splitInBlankSeparatedWords(input: String) -> [String] {
     
     while true {
         var token : NSString? = ""
-        let scanned = scanner.scanUpToCharactersFromSet(scanner.charactersToBeSkipped, intoString: &token)
+        let scanned = scanner.scanUpToCharactersFromSet(scanner.charactersToBeSkipped!, intoString: &token)
         
         if !scanned {
             break
