@@ -1,4 +1,4 @@
-A naive very incomplete Forth interpreter hacked for teaching
+A naive very incomplete Forth interpreter hacked to teach
 myself some Swift.
 
 DISCLAIMER: I have never programmed in Forth.
